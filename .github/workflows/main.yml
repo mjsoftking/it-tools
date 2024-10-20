@@ -22,6 +22,12 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm build
+      # 上传构建产物zip
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: it-tools
+          path: dist
       - name: Deploy to Halo
         run: |
           npx halo-static-pages-deploy-cli deploy -e ${{ secrets.ENDPOINT }} -i ${{ secrets.ID }} -t ${{ secrets.PAT }} -f dist
